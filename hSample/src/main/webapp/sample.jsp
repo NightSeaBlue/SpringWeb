@@ -8,7 +8,9 @@
 </head>
 <body>
 
- <a href='sample.do'> 시작 </a>
+ <a href='sample.do'> 시작 </a> <hr>
+ <a href='empSelect.do'> EMP 검색 1</a> <hr>
+ <a href='empDept.do'> EMP 검색 for DEPT</a> <hr>
 
 </body>
 </html>

@@ -21,8 +21,8 @@ public class JdbcTest {
 	public void testConnection() {
 		try {
 			Connection con = 
-			DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", 
-					"javassem", "1234");
+			DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", 
+					"scott", "tiger");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

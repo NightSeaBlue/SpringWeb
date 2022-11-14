@@ -3,60 +3,62 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardDAO">
 
-	
-	<!-- oracle 인 경우 	-->
+
+	<!-- oracle 인 경우 -->
 	<insert id="insertBoard" parameterType="board">
-		INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT, REGDATE, CNT)
+		INSERT INTO BOARD(SEQ,
+		TITLE, WRITER, CONTENT, REGDATE, CNT)
 		VALUES(board_seq.nextval,
-			#{title}, #{writer}, #{content}, 
-			sysdate, 0)
-	</insert> 
-	
-	<!--  <insert id="insertBoard" parameterType="board">
-		INSERT INTO BOARD( TITLE, WRITER, CONTENT, REGDATE, CNT)
-		VALUES(	#{title}, #{writer}, #{content}, now(), 0)
-	</insert>-->
-	
+		#{title}, #{writer}, #{content},
+		sysdate, 0)
+	</insert>
+
+	<!-- <insert id="insertBoard" parameterType="board"> INSERT INTO BOARD( 
+		TITLE, WRITER, CONTENT, REGDATE, CNT) VALUES( #{title}, #{writer}, #{content}, 
+		now(), 0) </insert> -->
+
 	<update id="updateBoard" parameterType="board">
 		UPDATE BOARD SET
-		TITLE = #{title},
+		TITLE =
+		#{title},
 		CONTENT = #{content}
 		WHERE SEQ = #{seq}
 	</update>
-	
+
 	<delete id="deleteBoard" parameterType="board">
 		DELETE FROM BOARD
-		WHERE SEQ = #{seq}
+		WHERE
+		SEQ = #{seq}
 	</delete>
-	
+
 	<select id="getBoard" parameterType="board" resultType="board">
 		SELECT *
 		FROM BOARD
 		WHERE SEQ = #{seq}
 	</select>
-	
-	<select id="getBoardList" resultType="board"  >
-			
-			SELECT *
-			FROM BOARD
-			ORDER BY SEQ DESC
-		
-	</select> 
-	
-	
-	<!-- 검색 추가  -->
-	<!-- 
-	<select id="getBoardList" resultType="board"  parameterType="hashmap">
-		
+
+	<select id="getBoardList" parameterType="hashmap"
+		resultType="board">
+
 		SELECT *
 		FROM BOARD
 		<where>
 			<if test="searchCondition != null">
 				${searchCondition} LIKE '%${searchKeyword}%'
 			</if>
-		</where>		
+		</where>
 		ORDER BY SEQ DESC
-		
+
 	</select>
-	 -->
+	<!--  
+		mybatis : 조건 검색시 JSTL Action Tag 사용 가능
+		${} : Statement : Column 명을 구분하기 위해서
+		#{}	: PreparedStatement (문자열에 자동으로 '' 붙여줌)
+	
+	-->
+
+	<!-- 검색 추가 -->
+	<!-- <select id="getBoardList" resultType="board" parameterType="hashmap"> 
+		SELECT * FROM BOARD <where> <if test="searchCondition != null"> ${searchCondition} 
+		LIKE '%${searchKeyword}%' </if> </where> ORDER BY SEQ DESC </select> -->
 </mapper>
